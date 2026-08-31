@@ -1,0 +1,47 @@
+{
+  "name": "Nova Table",
+  "tagline": "Modern Asian · Small Plates",
+  "about": "Neon-lit small plates and cocktails, plated fast, built for a night that starts here and doesn't slow down.",
+
+  "logo": { "text": "NT", "alt": "Nova Table logo" },
+
+  "theme": {
+    "skin": "futuristic",
+    "mode": "dark",
+    "accent": "#7af0e0",
+    "accent2": "#a98bff",
+    "heroImage": ""
+  },
+
+  "currency": { "code": "INR", "symbol": "₹" },
+
+  "contact": {
+    "phone": "+91 98765 43210",
+    "whatsapp": "+919876543210",
+    "address": "12 Neon Alley, Indiranagar, Bengaluru",
+    "maps": "https://maps.google.com/?q=Indiranagar+Bengaluru",
+    "email": "hello@novatable.example.com",
+    "bookUrl": ""
+  },
+
+  "social": {
+    "instagram": "https://instagram.com/novatable"
+  },
+
+  "hours": {
+    "mon": "closed",
+    "tue": [["18:00", "23:30"]],
+    "wed": [["18:00", "23:30"]],
+    "thu": [["18:00", "23:30"]],
+    "fri": [["18:00", "00:30"]],
+    "sat": [["12:30", "15:30"], ["18:00", "00:30"]],
+    "sun": [["12:30", "15:30"], ["18:00", "23:00"]]
+  },
+
+  "closedDates": [],
+
+  "data": {
+    "source": "json",
+    "menuUrl": "menu.json"
+  }
+}

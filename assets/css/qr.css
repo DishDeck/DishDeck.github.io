@@ -1,0 +1,35 @@
+/* QR generator - a plain worktool, matches admin.css's unbranded style. */
+
+:root { --accent: #7af0e0; --accent2: #a98bff; }
+
+body { background: var(--bg, #0a0e17); color: var(--ink, #eaf2ff); font: 15px/1.5 'Inter', system-ui, sans-serif; }
+
+.qr-wrap { max-width: 640px; margin: 0 auto; padding: 22px 20px 70px; }
+
+.qr-head { display: flex; align-items: center; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--line, rgba(160,190,255,.14)); margin-bottom: 20px; }
+.qr-head h1 { font-size: 1.25rem; margin: 0; }
+.qr-head .spacer { margin-left: auto; }
+
+label { display: block; font-size: .82rem; color: #8fa0bd; margin-bottom: 6px; }
+.field { margin-bottom: 16px; }
+select, input[type="text"], input[type="url"] {
+  width: 100%; background: var(--panel-2, #101827); border: 1px solid var(--line, rgba(160,190,255,.2));
+  color: inherit; border-radius: 8px; padding: 10px 12px; font: inherit;
+}
+.row { display: flex; gap: 12px; }
+.row > * { flex: 1; }
+
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line, rgba(160,190,255,.24)); background: var(--panel-2, #101827); color: inherit; cursor: pointer; font: inherit; text-decoration: none; }
+.btn:hover { border-color: var(--accent); }
+.btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #0b0d12; border-color: transparent; font-weight: 600; }
+
+.qr-preview {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 28px; border-radius: 14px; border: 1px solid rgba(160,190,255,.18); background: rgba(255,255,255,.02);
+  margin-top: 6px;
+}
+.qr-preview img { background: #fff; padding: 12px; border-radius: 10px; display: block; }
+.qr-link { font-size: .82rem; color: #8fa0bd; word-break: break-all; text-align: center; }
+.qr-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+.hint { background: rgba(122,240,224,.08); border: 1px dashed rgba(122,240,224,.4); border-radius: 10px; padding: 12px 16px; font-size: .85rem; margin-top: 18px; color: #c9d6ea; }

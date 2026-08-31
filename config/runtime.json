@@ -1,0 +1,9 @@
+{
+  "_comment": "Optional. Values here are merged on top of every restaurant's brand.json/yaml at load time, after tenants.json but before URL overrides. Use it to inject things you don't want to hand-edit into the repo per deploy: a Google Sheet id from a GitHub Secret via CI, a maintenance banner, a temporary price-freeze note. Safe to commit an empty shell like this one; the deploy workflow can overwrite it before publish. Never put private API keys here - it ships to every visitor's browser.",
+
+  "all": {},
+
+  "nova-table": {},
+
+  "saffron-house": {}
+}

@@ -1,0 +1,154 @@
+{
+  "updatedAt": "2026-08-31T09:00:00+05:30",
+  "settings": {
+    "closedToday": false,
+    "closedNote": "",
+    "announcement": "",
+    "specialsNote": "Fresh today, gone tomorrow."
+  },
+  "categories": [
+    { "id": "small-plates", "name": "Small Plates", "note": "Built to share", "sort": 10 },
+    { "id": "robata-grill", "name": "Robata Grill", "note": "Charcoal-fired", "sort": 20 },
+    { "id": "noodles-rice", "name": "Noodles & Rice", "sort": 30 },
+    { "id": "desserts", "name": "Desserts", "sort": 40 },
+    { "id": "cocktails", "name": "Cocktails", "sort": 50 }
+  ],
+  "items": [
+    {
+      "id": "edamame-truffle",
+      "category": "small-plates",
+      "name": "Truffle Edamame",
+      "desc": "Steamed edamame tossed in truffle-soy butter and sea salt.",
+      "price": 320,
+      "image": "",
+      "tags": ["vegan", "bestseller"],
+      "status": "on",
+      "sort": 10
+    },
+    {
+      "id": "tuna-tartare",
+      "category": "small-plates",
+      "name": "Yellowfin Tuna Tartare",
+      "desc": "Avocado, ponzu, crispy shallots, sesame tuile.",
+      "price": 620,
+      "image": "",
+      "tags": ["signature"],
+      "status": "on",
+      "special": true,
+      "specialPrice": 520,
+      "sort": 20
+    },
+    {
+      "id": "gyoza",
+      "category": "small-plates",
+      "name": "Chili Crisp Gyoza",
+      "desc": "Pan-seared pork gyoza, chili crisp, black vinegar.",
+      "price": 380,
+      "image": "",
+      "tags": ["chef"],
+      "spice": 2,
+      "status": "soldout",
+      "sort": 30
+    },
+    {
+      "id": "wagyu-skewer",
+      "category": "robata-grill",
+      "name": "A5 Wagyu Skewers",
+      "desc": "Binchotan-grilled, yuzu kosho glaze. Two pieces.",
+      "price": 1450,
+      "image": "",
+      "tags": ["signature", "new"],
+      "status": "on",
+      "sort": 10
+    },
+    {
+      "id": "miso-chicken",
+      "category": "robata-grill",
+      "name": "Miso-Glazed Chicken Thigh",
+      "desc": "Charred scallion, toasted sesame.",
+      "price": 480,
+      "variants": [{ "label": "Half", "price": 480 }, { "label": "Full", "price": 860 }],
+      "image": "",
+      "status": "on",
+      "sort": 20
+    },
+    {
+      "id": "tofu-skewer",
+      "category": "robata-grill",
+      "name": "Charred Tofu & Shishito",
+      "desc": "Sesame miso glaze, pickled ginger.",
+      "price": 360,
+      "image": "",
+      "tags": ["vegan", "gf"],
+      "status": "on",
+      "sort": 30
+    },
+    {
+      "id": "spicy-ramen",
+      "category": "noodles-rice",
+      "name": "Spicy Miso Ramen",
+      "desc": "Pork chashu, soft egg, bamboo, chili oil.",
+      "price": 540,
+      "image": "",
+      "tags": ["bestseller"],
+      "spice": 3,
+      "status": "on",
+      "sort": 10
+    },
+    {
+      "id": "veg-fried-rice",
+      "category": "noodles-rice",
+      "name": "Charcoal Vegetable Fried Rice",
+      "desc": "Black garlic, crispy shallots, sesame.",
+      "price": 420,
+      "image": "",
+      "tags": ["vegan"],
+      "status": "on",
+      "sort": 20
+    },
+    {
+      "id": "matcha-tiramisu",
+      "category": "desserts",
+      "name": "Matcha Tiramisu",
+      "desc": "Ceremonial matcha, mascarpone, cocoa nib crunch.",
+      "price": 340,
+      "image": "",
+      "tags": ["signature"],
+      "status": "on",
+      "special": true,
+      "specialPrice": 280,
+      "sort": 10
+    },
+    {
+      "id": "black-sesame-tart",
+      "category": "desserts",
+      "name": "Black Sesame Tart",
+      "desc": "Miso caramel, vanilla chantilly.",
+      "price": 300,
+      "image": "",
+      "status": "off",
+      "sort": 20
+    },
+    {
+      "id": "neon-mule",
+      "category": "cocktails",
+      "name": "Neon Mule",
+      "desc": "Vodka, butterfly-pea ginger beer, lime, edible glow rim.",
+      "price": 450,
+      "image": "",
+      "tags": ["signature"],
+      "status": "on",
+      "sort": 10
+    },
+    {
+      "id": "smoked-old-fashioned",
+      "category": "cocktails",
+      "name": "Smoked Old Fashioned",
+      "desc": "Bourbon, charred orange, applewood smoke.",
+      "price": 520,
+      "image": "",
+      "status": "on",
+      "sort": 20
+    }
+  ]
+}

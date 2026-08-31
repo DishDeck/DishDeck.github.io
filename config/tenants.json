@@ -1,0 +1,48 @@
+{
+  "_comment": "How tenants are picked: ?r=<id> in the URL, then /r/<id>/, then #/<id>, then the hosts map below, then \"default\".",
+  "default": "nova-table",
+
+  "hosts": {
+    "novatable.example.com": "nova-table",
+    "*.saffronhouse.example.com": "saffron-house"
+  },
+
+  "defaults": {
+    "currency": { "code": "INR", "symbol": "₹", "locale": "en-IN" },
+    "features": {
+      "search": true,
+      "specials": true,
+      "board": true,
+      "tagFilters": true,
+      "callToOrder": true,
+      "showSoldOut": true,
+      "autoRefreshSeconds": 120
+    },
+    "labels": {
+      "specialsTitle": "Today's Board",
+      "menuTitle": "The Menu",
+      "soldOut": "Sold out",
+      "unavailable": "Off menu today",
+      "specialBadge": "Today",
+      "openNow": "Open now",
+      "closedNow": "Closed",
+      "closedToday": "Closed today",
+      "orderCta": "Call to order"
+    }
+  },
+
+  "restaurants": [
+    {
+      "id": "nova-table",
+      "name": "Nova Table",
+      "dir": "restaurants/nova-table",
+      "config": "brand.json"
+    },
+    {
+      "id": "saffron-house",
+      "name": "Saffron House",
+      "dir": "restaurants/saffron-house",
+      "config": "brand.yaml"
+    }
+  ]
+}

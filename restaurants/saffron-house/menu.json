@@ -1,0 +1,156 @@
+{
+  "updatedAt": "2026-08-31T09:00:00+05:30",
+  "settings": {
+    "closedToday": false,
+    "closedNote": "",
+    "announcement": "",
+    "specialsNote": "Chef's picks, plated fresh only today."
+  },
+  "categories": [
+    { "id": "starters", "name": "Starters", "sort": 10 },
+    { "id": "tandoor", "name": "From the Tandoor", "sort": 20 },
+    { "id": "mains", "name": "Mains & Curries", "sort": 30 },
+    { "id": "breads-rice", "name": "Breads & Rice", "sort": 40 },
+    { "id": "desserts", "name": "Desserts", "sort": 50 }
+  ],
+  "items": [
+    {
+      "id": "samosa",
+      "category": "starters",
+      "name": "Heritage Samosa",
+      "desc": "Spiced potato and pea, mint-tamarind chutney.",
+      "price": 140,
+      "tags": ["vegan", "bestseller"],
+      "status": "on",
+      "sort": 10
+    },
+    {
+      "id": "seekh-kebab",
+      "category": "starters",
+      "name": "Lamb Seekh Kebab",
+      "desc": "Charcoal-grilled minced lamb, house spice blend.",
+      "price": 380,
+      "tags": ["signature"],
+      "spice": 2,
+      "status": "on",
+      "special": true,
+      "specialPrice": 320,
+      "sort": 20
+    },
+    {
+      "id": "paneer-tikka",
+      "category": "starters",
+      "name": "Paneer Tikka",
+      "desc": "Marinated cottage cheese, bell pepper, char-grilled.",
+      "price": 340,
+      "tags": ["veg"],
+      "status": "soldout",
+      "sort": 30
+    },
+    {
+      "id": "tandoori-chicken",
+      "category": "tandoor",
+      "name": "Tandoori Chicken (Half)",
+      "desc": "Yoghurt-marinated, slow-cooked over charcoal.",
+      "price": 460,
+      "variants": [{ "label": "Half", "price": 460 }, { "label": "Full", "price": 820 }],
+      "tags": ["signature"],
+      "status": "on",
+      "sort": 10
+    },
+    {
+      "id": "malai-tikka",
+      "category": "tandoor",
+      "name": "Malai Chicken Tikka",
+      "desc": "Cream, cashew, mild spice, char-finished.",
+      "price": 420,
+      "tags": ["bestseller"],
+      "status": "on",
+      "sort": 20
+    },
+    {
+      "id": "butter-chicken",
+      "category": "mains",
+      "name": "Butter Chicken",
+      "desc": "Tomato-cashew gravy, finished with cream and butter.",
+      "price": 480,
+      "tags": ["bestseller"],
+      "status": "on",
+      "sort": 10
+    },
+    {
+      "id": "dal-makhani",
+      "category": "mains",
+      "name": "Dal Makhani",
+      "desc": "Black lentils, slow-simmered overnight, tempered butter.",
+      "price": 340,
+      "tags": ["veg"],
+      "status": "on",
+      "special": true,
+      "specialPrice": 280,
+      "sort": 20
+    },
+    {
+      "id": "saag-paneer",
+      "category": "mains",
+      "name": "Saag Paneer",
+      "desc": "Cottage cheese in a slow-cooked spinach gravy.",
+      "price": 360,
+      "tags": ["veg"],
+      "status": "on",
+      "sort": 30
+    },
+    {
+      "id": "kadai-mutton",
+      "category": "mains",
+      "name": "Kadai Mutton",
+      "desc": "Bell peppers, onion, whole-spice masala.",
+      "price": 560,
+      "spice": 3,
+      "status": "off",
+      "sort": 40
+    },
+    {
+      "id": "garlic-naan",
+      "category": "breads-rice",
+      "name": "Garlic Naan",
+      "desc": "Tandoor-baked, garlic and coriander butter.",
+      "price": 90,
+      "tags": ["veg"],
+      "status": "on",
+      "sort": 10
+    },
+    {
+      "id": "biryani",
+      "category": "breads-rice",
+      "name": "Hyderabadi Chicken Biryani",
+      "desc": "Dum-cooked basmati, saffron, fried onion, raita.",
+      "price": 420,
+      "tags": ["signature"],
+      "status": "on",
+      "sort": 20
+    },
+    {
+      "id": "gulab-jamun",
+      "category": "desserts",
+      "name": "Gulab Jamun",
+      "desc": "Milk-solid dumplings in cardamom-rose syrup.",
+      "price": 160,
+      "tags": ["veg"],
+      "status": "on",
+      "sort": 10
+    },
+    {
+      "id": "kheer",
+      "category": "desserts",
+      "name": "Saffron Kheer",
+      "desc": "Slow-simmered rice pudding, pistachio, saffron.",
+      "price": 180,
+      "tags": ["veg", "gf"],
+      "status": "on",
+      "special": true,
+      "specialPrice": 150,
+      "sort": 20
+    }
+  ]
+}

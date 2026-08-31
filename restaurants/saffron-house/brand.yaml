@@ -1,0 +1,62 @@
+# Saffron House - classic skin, sourced from a published Google Sheet.
+#
+# To point this at your own sheet:
+#   1. In Google Sheets: File > Share > Publish to web is NOT required -
+#      just set sharing to "Anyone with the link: Viewer".
+#   2. Copy the long id from the sheet's URL, between /d/ and /edit.
+#   3. Paste it into data.sheetId below.
+#   4. Name your tabs Menu / Categories / Settings (or update data.sheets).
+# See restaurants/saffron-house/SHEET_TEMPLATE.md for the exact columns.
+
+name: Saffron House
+tagline: Heritage Indian Kitchen
+about: >
+  Recipes carried down four generations, cooked slow over wood-fired tandoors
+  and finished the way our grandmothers finished them - by taste, not by timer.
+
+logo:
+  text: SH
+  alt: Saffron House crest
+
+theme:
+  skin: classic
+  mode: dark
+  accent: "#d4a24c"
+  accent2: "#8a5a3b"
+  heroImage: ""
+
+currency:
+  code: INR
+  symbol: "₹"
+
+contact:
+  phone: "+91 98450 11223"
+  whatsapp: "+919845011223"
+  address: 45 Heritage Lane, Jayanagar, Bengaluru
+  maps: https://maps.google.com/?q=Jayanagar+Bengaluru
+  email: reservations@saffronhouse.example.com
+  bookUrl: ""
+
+social:
+  instagram: https://instagram.com/saffronhouse
+  facebook: https://facebook.com/saffronhouse
+
+hours:
+  mon: [["12:00", "15:30"], ["19:00", "23:00"]]
+  tue: [["12:00", "15:30"], ["19:00", "23:00"]]
+  wed: [["12:00", "15:30"], ["19:00", "23:00"]]
+  thu: [["12:00", "15:30"], ["19:00", "23:00"]]
+  fri: [["12:00", "15:30"], ["19:00", "23:30"]]
+  sat: [["12:00", "16:00"], ["19:00", "23:30"]]
+  sun: [["12:00", "16:00"], ["19:00", "23:00"]]
+
+closedDates: []
+
+data:
+  source: json
+  menuUrl: menu.json
+  # To switch to a live Google Sheet instead, comment the two lines above
+  # and uncomment these three:
+  # source: sheet
+  # sheetId: "1AbCDefGhIJkLmnoPQRstuVWxyz0123456789"
+  # sheets: { menu: Menu, categories: Categories, settings: Settings }
