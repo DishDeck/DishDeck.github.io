@@ -24,21 +24,25 @@ index.html            the storefront (menu, hero, specials, hours, footer)
 board.html             a printable "Today's Board" page (specials, QR, PDF-ready)
 admin.html             a no-backend price/status/specials editor for staff
 qr.html                 a QR-code generator for any menu link or table card
-akshaya-patra/, nova-table/, saffron-house/   clean-URL entry points, see "Clean URLs" below
-  index.html + admin.html   (one copy of each root page, per restaurant)
 config/
   tenants.json         registry: which restaurants exist, how to route to each
   runtime.json          optional CI/env overrides layered on top of each brand
 restaurants/
-  akshaya-patra/         classic-skin example, the default restaurant — a full
-    brand.json             Indian menu (12 sections, 55 dishes: tandoor,
-    menu.json               biryani, South Indian, curries, thali staples...)
+  akshaya-patra/         the default restaurant — a full Indian menu (12 sections,
+    brand.json             55 dishes: soups, tandoor, biryani, South Indian, 
+    menu.json               curries, breads, desserts, beverages, etc.)
+    index.html           entry point for this restaurant when accessed via ?r=
+    admin.html           menu editor for this restaurant
   nova-table/            futuristic-skin example, sourced from a local menu.json
     brand.json
     menu.json
+    index.html
+    admin.html
   saffron-house/         classic-skin example — an Indian restaurant (butter
     brand.yaml            chicken, biryani, tandoori, dal makhani, gulab jamun),
     menu.json              and documents the Google Sheet path
+    index.html
+    admin.html
     SHEET_TEMPLATE.md    exact columns to use if you switch it to a live Sheet
 assets/
   css/  theme.css (tokens + both skins), app.css, admin.css, qr.css
@@ -50,58 +54,52 @@ assets/
 DishDeck is one deployed site serving many restaurants. On load it resolves
 which one to show, in this order:
 
-1. `?r=<id>` in the URL — e.g. `index.html?r=saffron-house`
-2. a clean `/<id>/` path — e.g. `/nova-table/` (see "Clean URLs" below)
-3. a `/r/<id>/` path segment (an older, equivalent form of the same thing)
-4. `#/<id>` in the URL hash
-5. the `hosts` map in `config/tenants.json` (for a custom domain per restaurant)
-6. `default` in `config/tenants.json` — currently **Akshaya Patra**
+1. `?r=<id>` in the URL — e.g. `/?r=saffron-house` or `/admin.html?r=nova-table`
+2. `#/<id>` in the URL hash — e.g. `/#/saffron-house`
+3. the `hosts` map in `config/tenants.json` (for a custom domain per restaurant)
+4. `default` in `config/tenants.json` — currently **Akshaya Patra**
 
-For a single-restaurant deployment, just set `default` and ignore the rest.
+For a single-restaurant deployment, just set `default` and leave the others
+unset.
 
-## Clean per-restaurant URLs
+## Multi-restaurant setup
 
-`?r=akshaya-patra` always works with zero setup, but a clean URL like
-`DishDeck.github.io/akshaya-patra/` reads better on a menu card or a QR
-code — and `DishDeck.github.io/akshaya-patra/admin` gets the same restaurant's
-price/status editor with nowhere to type. GitHub Pages has no server-side
-rewriting, so this repo gets clean URLs the only way a static host can: a
-real folder per restaurant at the repo root, containing a copy of the root
-`index.html` and `admin.html`. That's what `akshaya-patra/`, `nova-table/`
-and `saffron-house/` are — open any of their `index.html`/`admin.html` next
-to the root ones, they're identical. The app resolves which restaurant to
-show from the URL path itself (step 2 above), so neither shell needs to know
-its own restaurant's id — the same two files work unmodified in every
-restaurant's folder.
+Every restaurant gets its own folder inside `restaurants/<id>/` with:
+- `brand.json` or `brand.yaml` — name, logo, contact, hours, theme (skin/accent)
+- `menu.json` — menu items (or point to a Google Sheet via config)
+- `index.html` — entry point, resolves `?r=<id>` at runtime
+- `admin.html` — menu editor for non-technical staff
 
-`/<id>/admin` (no `.html`) works because GitHub Pages serves `<name>.html`
-for a request to `/<name>` whenever no file extension is given and no folder
-of that exact name exists — the same behaviour that lets `/akshaya-patra`
-(no trailing slash) find that folder's `index.html`. If that ever doesn't
-resolve on your specific setup, `/<id>/admin.html` with the extension always
-works regardless.
+The root-level `index.html` and `admin.html` always default to the restaurant
+set in `config/tenants.json`'s `default` field. Point a menu card QR code to
+`/?r=<id>` to show a specific restaurant.
 
-To give a new restaurant `<your-id>` the same two clean URLs:
+**Can I have clean URLs like `/nova-table/` instead of `/?r=nova-table`?**
+
+Yes, but it requires an extra step. If you want a cleaner URL for QR codes or
+menu cards, you can add a folder at the repo root:
 
 ```bash
-mkdir <your-id>
-cp index.html admin.html <your-id>/
+mkdir <id>
+cp index.html admin.html <id>/
 ```
 
-That's it — no edits to either copied file. If you ever restructure the root
-`index.html` or `admin.html`, copy it over every restaurant folder's copy
-again to keep them in sync (there's currently no build step doing this for
-you).
+Then `/nova-table/` (no query string) will work because GitHub Pages will find
+the folder and serve its `index.html`. The app resolves `?r=` from the path,
+so the same root files work in the folder unchanged. If you ever restructure
+the root `index.html` or `admin.html`, you'll need to copy them over to each
+restaurant's folder again.
 
-**A true subdomain** (`akshayapatra.dishdeck.github.io`) is not something
-GitHub or anyone else can hand out under `github.io` — that namespace belongs
-to GitHub. It becomes possible once you point your **own** domain at GitHub
-Pages (e.g. `akshayapatra.yourdomain.com` via a CNAME record); the `hosts` map
-in `config/tenants.json` is exactly for that case.
+**Custom domains like `nova-table.yourdomain.com`?**
+
+Use the `hosts` map in `config/tenants.json`. This works once you point your
+domain at GitHub Pages via a CNAME record. The `hosts` map doesn't work on
+`github.io` subdomains (GitHub owns that namespace), only on your own domain.
 
 ## Getting your own restaurant live in 5 minutes
 
 1. Copy `restaurants/akshaya-patra/` (or `nova-table/`/`saffron-house/`) to `restaurants/<your-id>/`.
+   (Copy the whole folder, including `index.html`, `admin.html`, `brand.json`, `menu.json`.)
 2. Edit `brand.json` (or `.yaml`) — name, tagline, contact info, hours, and
    `theme.skin` / `theme.accent` / `theme.accent2` to taste. Drop a logo file
    in the folder and point `logo.src` at it, or leave it blank for an
@@ -109,10 +107,8 @@ in `config/tenants.json` is exactly for that case.
 3. Edit `menu.json` — or switch `data.source` to `sheet` and point it at a
    Google Sheet (see below) if you want non-technical staff editing it.
 4. Add an entry for `<your-id>` to `config/tenants.json`'s `restaurants` array.
-5. Optional — for clean URLs instead of `?r=`: `mkdir <your-id> && cp index.html admin.html <your-id>/`.
-6. Commit and push. GitHub Pages (via the included Actions workflow) deploys
-   automatically. Visit `/?r=<your-id>` (or `/<your-id>/` and `/<your-id>/admin`
-   if you did step 5).
+5. Commit and push. GitHub Pages (via the included Actions workflow) deploys
+   automatically. Visit `/?r=<your-id>` to see your restaurant.
 
 ## Changing prices / today's special / sold-out — without touching code
 
@@ -134,12 +130,11 @@ This works because Google Sheets can export any sheet as a public CSV URL —
 no API key, no server, and it stays inside GitHub Pages' free static hosting.
 
 ### C. Use `admin.html` as a quick local editor
-Open `/<id>/admin` (or `admin.html?r=<id>`) for a spreadsheet-like grid of the
-current menu. Edit prices/status/specials, then **Download menu.json**
-(commit it over the restaurant's file) or **Copy CSV** (paste it over the
-Menu tab of a Google Sheet). It never writes anywhere by itself — this is a
-static site with no server, so "save" always means "export, then commit or
-paste it yourself".
+Open `/admin.html?r=<id>` for a spreadsheet-like grid of the current menu.
+Edit prices/status/specials, then **Download menu.json** (commit it over the
+restaurant's file) or **Copy CSV** (paste it over the Menu tab of a Google
+Sheet). It never writes anywhere by itself — this is a static site with no
+server, so "save" always means "export, then commit or paste it yourself".
 
 ## Daily specials board
 
