@@ -521,16 +521,19 @@ function renderFooter() {
       h('div', {}, [
         h('h3', {}, 'Hours'),
         Object.keys(b.hours || {}).length
-          ? h('table.hours-table', {}, rows.map((r) => h('tr', { 'data-today': r.isToday ? '1' : '0' }, [h('td', {}, r.short), h('td', {}, r.text)])))
+          ? h('table.hours-table', {}, rows.map((r) => h('tr', { 'data-today': r.isToday ? '1' : '0' }, [
+              h('td', {}, r.short),
+              h('td', {}, r.text),
+            ])))
           : h('p.footer-links', {}, 'Open every day.'),
       ]),
       h('div', {}, [
-        h('h3', {}, 'Find us'),
+        h('h3', {}, 'Contact'),
         h('div.footer-links', {}, [
-          b.contact.address ? h('span', {}, b.contact.address) : null,
-          b.contact.phone ? h('a', { href: 'tel:' + b.contact.phone }, b.contact.phone) : null,
-          b.contact.email ? h('a', { href: 'mailto:' + b.contact.email }, b.contact.email) : null,
-          b.contact.maps ? h('a', { href: b.contact.maps, target: '_blank', rel: 'noopener' }, 'Get directions') : null,
+          b.contact.address ? h('span', { title: 'Address' }, b.contact.address) : null,
+          b.contact.phone ? h('a', { href: 'tel:' + b.contact.phone, title: 'Call us' }, b.contact.phone) : null,
+          b.contact.email ? h('a', { href: 'mailto:' + b.contact.email, title: 'Email us' }, b.contact.email) : null,
+          b.contact.maps ? h('a', { href: b.contact.maps, target: '_blank', rel: 'noopener', title: 'Open in maps' }, 'Get directions') : null,
         ]),
       ]),
       h('div', {}, [
@@ -542,7 +545,7 @@ function renderFooter() {
       h('span', {}, '© ' + new Date().getFullYear() + ' ' + b.name),
       h('span.spacer'),
       h('span', {}, 'Menu synced ' + relTime(state.data.updatedAt)),
-      h('span', {}, '· Powered by DishDeck'),
+      h('span', {}, 'Powered by DishDeck'),
     ]),
   ]));
 }
