@@ -222,14 +222,35 @@ img.brand-logo { padding: 5px; }
 .chip-count { opacity: .6; font-variant-numeric: tabular-nums; margin-left: 4px; }
 
 .search {
-  display: flex; align-items: center; gap: 8px;
-  padding: 8px 14px; border-radius: var(--radius-pill);
-  border: 1px solid var(--line); background: var(--panel);
-  min-width: 0; width: clamp(150px, 22vw, 260px);
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; border-radius: var(--radius-pill);
+  border: 2px solid var(--accent-a35);
+  background: var(--panel);
+  min-width: 0; width: clamp(150px, 22vw, 280px);
+  box-shadow: 0 0 0 2px var(--accent-a08), 0 2px 8px var(--accent-a15);
+  transition: all var(--tr);
 }
-.search input { border: 0; background: none; outline: none; width: 100%; min-height: 22px; }
-.search input::placeholder { color: var(--ink-3); }
-.search-clear { border: 0; background: none; color: var(--ink-3); cursor: pointer; padding: 0 2px; font-size: 1.1rem; line-height: 1; }
+.search:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-a15), 0 4px 16px var(--accent-a25);
+}
+.search input {
+  border: 0; background: none; outline: none;
+  width: 100%; min-height: 24px;
+  font-size: var(--step--0); font-weight: 500;
+}
+.search input::placeholder {
+  color: var(--ink-3);
+  font-weight: 500;
+}
+.search-clear {
+  border: 0; background: none;
+  color: var(--accent);
+  cursor: pointer; padding: 0 4px;
+  font-size: 1.2rem; line-height: 1;
+  transition: opacity var(--tr-fast);
+}
+.search-clear:hover { opacity: .7; }
 
 .filter-row { display: flex; gap: 8px; flex-wrap: wrap; padding-top: 8px; }
 
@@ -243,7 +264,14 @@ img.brand-logo { padding: 5px; }
 @media (max-width: 640px) {
   .nav-row { flex-wrap: wrap; row-gap: 10px; }
   .cat-scroll { order: 1; width: 100%; }
-  .search { order: 2; width: 100%; padding-block: 10px; }
+  .search {
+    order: 2; width: 100%;
+    padding: 12px 16px;
+    font-size: var(--step-0);
+    border-width: 2px;
+  }
+  .search input { font-size: 1rem; min-height: 28px; }
+  .search-clear { font-size: 1.3rem; }
   .chip { padding: 10px 16px; }
   .btn { padding: 12px 18px; }
   .btn-icon { width: 44px; height: 44px; }

@@ -1,10 +1,8 @@
 # DishDeck
 
-A free, static, multi-restaurant menu site for GitHub Pages. One codebase,
-unlimited restaurants — each with its own branding, colours, fonts and logo —
-and a menu that updates live from an external source (a Google Sheet or a
-JSON file) with **no redeploy needed** to change a price, mark a dish sold
-out, or post today's special.
+**Replace printed menu books with a mobile-first digital menu.** A free, static, multi-restaurant menu site for GitHub Pages. One codebase, unlimited restaurants — each with its own branding, colours, fonts and logo — and a menu that updates live from an external source (a Google Sheet or a JSON file) with **no redeploy needed** to change a price, mark a dish sold out, or post today's special.
+
+Perfect for QR codes on table cards — guests scan, browse on their phone, search with one tap.
 
 Two visual "skins" ship out of the box, both in dark and light mode:
 
@@ -183,18 +181,14 @@ successfully loaded menu (cached in the visitor's browser) and shows a small
 
 ## Mobile-first
 
-Most guests open this at the table on a phone, not at a desk, so that's the
-default layout, not a squeezed-down afterthought:
+This is designed for guests at the table on a phone — the typical use case when replacing a printed menu:
 
-- Category chips and search sit in their own full-width rows under 640px,
-  each large enough to tap comfortably.
-- A **Call / WhatsApp / Book** bar stays pinned to the bottom of the screen
-  on phone widths, within one-handed thumb reach, instead of living only in
-  the header where it's a stretch to reach on a tall screen.
-- The dish detail sheet caps its own height and scrolls internally, so it
-  never runs off the bottom of a small screen.
-- Searching always looks across the *entire* menu regardless of which
-  category chip is selected — see "Search" below.
+- **Search bar is prominent** — guests can find a dish in seconds, even if they don't know the category.
+- **One-handed use** — category chips, search, and Call/WhatsApp/Book buttons all reachable with a thumb.
+- **Category chips and search** sit in their own full-width rows under 640px, each large enough to tap comfortably.
+- A **Call / WhatsApp / Book** bar stays pinned to the bottom of the screen on phone widths within thumb reach.
+- The dish detail sheet caps its own height and scrolls internally, so it never runs off the bottom of a small screen.
+- **Searching always looks across the *entire* menu** regardless of which category chip is selected — see "Search" below.
 
 ## Dish photos & video
 
