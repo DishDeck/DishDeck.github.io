@@ -19,9 +19,60 @@ const state = {
   query: '',
   activeTag: null,
   refreshTimer: null,
+  videoObserver: null,
 };
 
 const root = () => qs('#app');
+
+/* ---------------------------- video previews ---------------------------- */
+
+// A muted autoplay preview is a fair trade for a visitor on wifi with data
+// to spare, and a battery/bandwidth tax for anyone who isn't - so it's opt
+// out, not opt in: skip it under prefers-reduced-motion or an explicit
+// "Data Saver" connection, where a still poster frame is the better default.
+const wantsAutoplayPreview = () => {
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const saveData = navigator.connection && navigator.connection.saveData;
+  return !reduced && !saveData;
+};
+
+/** <source> tags for a list of clip URLs, typed from their file extension. */
+function videoSources(urls) {
+  const typeOf = (u) => (/\.webm(\?|$)/i.test(u) ? 'video/webm' : /\.mov(\?|$)/i.test(u) ? 'video/quicktime' : 'video/mp4');
+  return urls.map((u) => h('source', { src: u, type: typeOf(u) }));
+}
+
+/** A grid-card video preview: no network fetch until it actually scrolls
+ * into view, muted+looping while visible, paused (not unloaded) once it
+ * scrolls back out - so flicking through a long menu doesn't quietly burn
+ * through someone's data plan on clips they never really looked at. */
+function lazyPreviewVideo(it) {
+  const video = h('video.card-video', {
+    loop: true, playsinline: true, 'webkit-playsinline': true,
+    preload: 'none', poster: it.image || placeholderImage(it.name),
+  }, videoSources(it.video));
+  // Setting the "muted" attribute doesn't reliably mute an element created
+  // via document.createElement (browsers only honour it as the *initial*
+  // state during HTML parsing) - the muted property must be set directly,
+  // or autoplay is silently blocked by the browser's audio-with-autoplay policy.
+  video.muted = true;
+  video.defaultMuted = true;
+  if (!state.videoObserver) {
+    state.videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const el = entry.target;
+        if (entry.isIntersecting) {
+          if (!el.dataset.loaded) { el.load(); el.dataset.loaded = '1'; }
+          el.play().catch(() => {}); // autoplay can be blocked; the poster still shows
+        } else {
+          el.pause();
+        }
+      });
+    }, { rootMargin: '80px 0px', threshold: 0.35 });
+  }
+  state.videoObserver.observe(video);
+  return video;
+}
 
 /* --------------------------------- boot -------------------------------- */
 
@@ -324,6 +375,9 @@ function matchesQuery(it, q) {
 function renderMenu() {
   const menu = qs('#menu');
   clear(menu);
+  // renderMenu rebuilds every card from scratch, so any video observer from
+  // the previous pass would otherwise keep watching now-detached elements.
+  if (state.videoObserver) { state.videoObserver.disconnect(); state.videoObserver = null; }
   const b = state.brand, d = state.data;
   const showSoldOut = b.features.showSoldOut !== false;
   const searching = state.query.trim() !== '';
@@ -379,12 +433,15 @@ function priceTag(it, brand, compact) {
 function dishCard(it) {
   const b = state.brand;
   const img = it.image || placeholderImage(it.name);
+  const hasVideo = it.video && it.video.length && it.status !== 'off';
+  const showVideo = hasVideo && wantsAutoplayPreview();
   return h('button.card', { 'data-status': it.status, onclick: () => openDish(it) }, [
     h('div.card-media', {}, [
-      h('img', { src: img, alt: it.name, loading: 'lazy' }),
+      showVideo ? lazyPreviewVideo(it) : h('img', { src: img, alt: it.name, loading: 'lazy' }),
       h('div.card-badges', {}, [
         it.special ? h('span.badge.badge-special', {}, b.labels.specialBadge || 'Today') : null,
         it.status === 'soldout' ? h('span.badge.badge-dim', {}, b.labels.soldOut || 'Sold out') : null,
+        hasVideo ? h('span.badge.badge-dim', { title: 'Video preview' }, '▶ Clip') : null,
       ]),
       it.status === 'soldout' ? h('span.stamp', {}, b.labels.soldOut || 'Sold Out') : null,
     ]),
@@ -411,12 +468,20 @@ function openDish(it) {
     dlg = h('dialog.sheet', { id: 'dishDialog' });
     document.body.append(dlg);
     dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    // Stop any playing clip the instant the sheet closes, rather than
+    // leaving it - and its audio - running behind a dialog nobody can see.
+    dlg.addEventListener('close', () => { const v = dlg.querySelector('video'); if (v) v.pause(); });
   }
   clear(dlg);
   const img = it.image || placeholderImage(it.name);
+  const hasVideo = it.video && it.video.length;
   dlg.append(
     h('button.sheet-close', { onclick: () => dlg.close(), 'aria-label': 'Close' }, '✕'),
-    h('div.sheet-media', {}, [h('img', { src: img, alt: it.name })]),
+    h('div.sheet-media', {}, [
+      hasVideo
+        ? h('video', { controls: true, playsinline: true, preload: 'metadata', poster: img }, videoSources(it.video))
+        : h('img', { src: img, alt: it.name }),
+    ]),
     h('div.sheet-body', {}, [
       it.special ? h('span.badge.badge-special', { style: 'align-self:flex-start' }, b.labels.specialBadge || 'Today') : null,
       h('h2.sheet-title', {}, it.name),

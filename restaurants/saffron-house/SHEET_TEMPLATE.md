@@ -18,7 +18,8 @@ Make a Google Sheet with up to three tabs (only **Menu** is required):
 | `description` | no | shown under the name |
 | `price` | yes | plain number, no currency symbol |
 | `variants` | no | e.g. `Half=180 \| Full=320` |
-| `image` | no | a public image URL (Google Drive share links won't work directly — use Imgur, GitHub, or your CDN) |
+| `image` | no | a public image URL (Google Drive share links won't work directly — use Imgur, GitHub, or your CDN); used as the poster frame if `video` is also set |
+| `video` | no | a public **.mp4** or **.webm** URL — a short (5–15s) clip of the dish. Shown as a muted, looping preview on the card and played with sound when a guest opens it. Give two URLs separated by `\|` (e.g. an `.mp4` and a `.webm` copy) if you have both, for smaller file size on browsers that support webm |
 | `tags` | no | comma-separated: `veg, bestseller, chef` |
 | `spice` | no | `0`–`3` |
 | `status` | yes | `on`, `soldout`, `off`, or `hidden` |
@@ -73,3 +74,17 @@ which source loaded.
 If the sheet is ever unreachable, the site falls back to the last successful
 copy (cached in the visitor's browser) and shows a small "showing cached menu"
 notice rather than an empty page.
+
+## Adding a dish video
+
+Most guests are on mobile data, so keep clips short and light: **5–15
+seconds, under ~3–5MB, 720p is plenty**. A vertical or square crop (9:16 or
+1:1) tends to look better than widescreen in the card grid. Host the file
+anywhere that serves a direct `.mp4`/`.webm` URL — GitHub itself works for a
+small file (drag it into an Issue/Discussion comment to get a public link,
+or commit it into the restaurant's own folder and reference it as a plain
+filename in the `video` column).
+
+The card preview never autoplays for a guest with `prefers-reduced-motion`
+switched on or a "Data Saver" connection — they see the poster frame instead,
+and can still tap into the dish to watch it deliberately, with sound.

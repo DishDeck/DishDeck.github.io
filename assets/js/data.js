@@ -98,6 +98,12 @@ export function normaliseItem(raw, index, brand) {
   const image = String(pick(raw, 'image', 'img', 'photo', 'imageUrl', 'image_url') || '').trim();
   const category = slug(pick(raw, 'category', 'section', 'group', 'course') || 'menu');
 
+  // Optional short clip (webm/mp4) shown as a lazy, muted, looping preview on
+  // the card and played with sound in the dish sheet. One URL, or several
+  // separated by "|"/"," for format fallback (e.g. a webm + an mp4 copy) -
+  // reuses the same separator convention as tags/variants.
+  const video = list(pick(raw, 'video', 'videoUrl', 'video_url', 'clip')).map((v) => assetUrl(brand, v));
+
   return {
     id: String(pick(raw, 'id', 'sku', 'code') || slug(name) || 'item-' + index),
     category,
@@ -106,7 +112,8 @@ export function normaliseItem(raw, index, brand) {
     price,
     specialPrice: activeSpecial ? specialPrice : null,
     variants,
-    image: image ? (/^(https?:|data:|\/\/)/i.test(image) ? image : assetUrl(brand, image)) : '',
+    image: assetUrl(brand, image),
+    video,
     tags: list(pick(raw, 'tags', 'labels', 'badges')).map((t) => t.toLowerCase()),
     spice: num(pick(raw, 'spice', 'heat', 'spiceLevel'), 0) || 0,
     status,
@@ -241,7 +248,7 @@ export async function loadMenu(brand, { useCache = true } = {}) {
 
 /** Rows for the admin editor / CSV export, in sheet column order. */
 export const SHEET_COLUMNS = [
-  'id', 'category', 'name', 'description', 'price', 'variants', 'image', 'tags',
+  'id', 'category', 'name', 'description', 'price', 'variants', 'image', 'video', 'tags',
   'spice', 'status', 'special', 'special_price', 'special_from', 'special_to', 'sort', 'note',
 ];
 
@@ -254,6 +261,7 @@ export function itemToSheetRow(it) {
     price: it.price === null ? '' : it.price,
     variants: (it.variants || []).map((v) => v.label + '=' + v.price).join(' | '),
     image: it.image,
+    video: (it.video || []).join(' | '),
     tags: (it.tags || []).join(', '),
     spice: it.spice || '',
     status: it.status,
@@ -280,6 +288,7 @@ export function toMenuJSON(data) {
       price: it.price,
       variants: it.variants && it.variants.length ? it.variants : undefined,
       image: it.image,
+      video: it.video && it.video.length ? it.video : undefined,
       tags: it.tags && it.tags.length ? it.tags : undefined,
       spice: it.spice || undefined,
       status: it.status,

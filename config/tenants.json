@@ -1,6 +1,6 @@
 {
-  "_comment": "How tenants are picked: ?r=<id> in the URL, then /r/<id>/, then #/<id>, then the hosts map below, then \"default\".",
-  "default": "nova-table",
+  "_comment": "How tenants are picked: ?r=<id> in the URL, then the first URL path segment (e.g. /akshaya-patra/), then /r/<id>/, then #/<id>, then the hosts map below, then \"default\".",
+  "default": "akshaya-patra",
 
   "hosts": {
     "novatable.example.com": "nova-table",
@@ -32,6 +32,12 @@
   },
 
   "restaurants": [
+    {
+      "id": "akshaya-patra",
+      "name": "Akshaya Patra",
+      "dir": "restaurants/akshaya-patra",
+      "config": "brand.json"
+    },
     {
       "id": "nova-table",
       "name": "Nova Table",

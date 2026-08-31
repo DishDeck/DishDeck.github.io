@@ -1,0 +1,91 @@
+{
+  "updatedAt": "2026-09-01T09:00:00+05:30",
+  "settings": {
+    "closedToday": false,
+    "closedNote": "",
+    "announcement": "",
+    "specialsNote": "Cooked once, served fresh — gone when the pot is empty."
+  },
+  "categories": [
+    { "id": "soups", "name": "Soups", "sort": 5 },
+    { "id": "starters-veg", "name": "Starters (Veg)", "sort": 10 },
+    { "id": "starters-non-veg", "name": "Starters (Non-Veg)", "sort": 15 },
+    { "id": "tandoor", "name": "From the Tandoor", "note": "Charcoal-fired", "sort": 20 },
+    { "id": "south-indian", "name": "South Indian", "note": "Dosa, idli, uttapam", "sort": 25 },
+    { "id": "curries-veg", "name": "Curries (Veg)", "sort": 30 },
+    { "id": "curries-non-veg", "name": "Curries (Non-Veg)", "sort": 35 },
+    { "id": "biryani-rice", "name": "Biryani & Rice", "sort": 40 },
+    { "id": "breads", "name": "Breads", "sort": 45 },
+    { "id": "accompaniments", "name": "Accompaniments", "sort": 50 },
+    { "id": "desserts", "name": "Desserts", "sort": 55 },
+    { "id": "beverages", "name": "Beverages", "sort": 60 }
+  ],
+  "items": [
+    { "id": "tomato-shorba", "category": "soups", "name": "Tomato Dhaniya Shorba", "desc": "Slow-simmered tomato and coriander broth, cumin tempering.", "price": 160, "tags": ["veg"], "status": "on", "sort": 10 },
+    { "id": "mulligatawny", "category": "soups", "name": "Mulligatawny Soup", "desc": "Lentil and vegetable soup, southern spice blend, a squeeze of lime.", "price": 180, "tags": ["veg"], "status": "on", "sort": 20 },
+    { "id": "chicken-soup", "category": "soups", "name": "Pepper Chicken Soup", "desc": "Shredded chicken, black pepper, garlic, coriander.", "price": 200, "status": "on", "sort": 30 },
+
+    { "id": "veg-samosa", "category": "starters-veg", "name": "Punjabi Samosa", "desc": "Spiced potato and pea, tamarind and mint chutney.", "price": 140, "tags": ["veg", "bestseller"], "status": "on", "sort": 10 },
+    { "id": "paneer-tikka", "category": "starters-veg", "name": "Paneer Tikka", "desc": "Marinated cottage cheese, bell pepper and onion, char-grilled.", "price": 340, "tags": ["veg", "signature"], "status": "on", "special": true, "specialPrice": 290, "sort": 20 },
+    { "id": "hara-bhara-kebab", "category": "starters-veg", "name": "Hara Bhara Kebab", "desc": "Spinach and green pea patties, mint yoghurt dip.", "price": 260, "tags": ["veg"], "status": "on", "sort": 30 },
+    { "id": "gobi-manchurian", "category": "starters-veg", "name": "Gobi Manchurian", "desc": "Crisp cauliflower, Indo-Chinese chilli-garlic glaze.", "price": 280, "tags": ["veg"], "spice": 2, "status": "on", "sort": 40 },
+    { "id": "dahi-papdi-chaat", "category": "starters-veg", "name": "Dahi Papdi Chaat", "desc": "Crisp wafers, yoghurt, tamarind and mint chutney, sev.", "price": 180, "tags": ["veg"], "status": "soldout", "sort": 50 },
+
+    { "id": "chicken-65", "category": "starters-non-veg", "name": "Chicken 65", "desc": "Deep-fried, curry leaf and dried chilli tempering.", "price": 340, "tags": ["bestseller"], "spice": 3, "status": "on", "sort": 10 },
+    { "id": "fish-amritsari", "category": "starters-non-veg", "name": "Amritsari Fish", "desc": "Carom-seed batter, chickpea flour, deep-fried.", "price": 420, "status": "on", "sort": 20 },
+    { "id": "mutton-seekh", "category": "starters-non-veg", "name": "Mutton Seekh Kebab", "desc": "Minced mutton, house spice blend, charcoal-grilled.", "price": 420, "tags": ["signature"], "spice": 2, "status": "on", "sort": 30 },
+    { "id": "prawn-koliwada", "category": "starters-non-veg", "name": "Prawn Koliwada", "desc": "Coastal-style spiced, crisp-fried prawns, lime.", "price": 460, "status": "off", "sort": 40 },
+
+    { "id": "tandoori-chicken", "category": "tandoor", "name": "Tandoori Chicken", "desc": "Yoghurt-marinated, slow-cooked over charcoal.", "price": 460, "variants": [{ "label": "Half", "price": 460 }, { "label": "Full", "price": 820 }], "tags": ["signature", "bestseller"], "status": "on", "sort": 10 },
+    { "id": "malai-tikka", "category": "tandoor", "name": "Malai Chicken Tikka", "desc": "Cream, cashew, mild spice, char-finished.", "price": 420, "status": "on", "sort": 20 },
+    { "id": "tandoori-prawns", "category": "tandoor", "name": "Tandoori Prawns", "desc": "Carom seed and mustard oil marinade.", "price": 560, "status": "on", "sort": 30 },
+    { "id": "paneer-shashlik", "category": "tandoor", "name": "Paneer Shashlik", "desc": "Skewered paneer, peppers, onion, tandoor char.", "price": 360, "tags": ["veg"], "status": "on", "sort": 40 },
+
+    { "id": "masala-dosa", "category": "south-indian", "name": "Masala Dosa", "desc": "Crisp rice-and-lentil crepe, spiced potato filling, sambar, chutney.", "price": 180, "tags": ["veg", "bestseller"], "status": "on", "sort": 10 },
+    { "id": "plain-dosa", "category": "south-indian", "name": "Plain Dosa", "desc": "Crisp rice-and-lentil crepe, sambar, chutney.", "price": 140, "tags": ["veg"], "status": "on", "sort": 20 },
+    { "id": "idli-sambar", "category": "south-indian", "name": "Idli Sambar (2 pcs)", "desc": "Steamed rice cakes, lentil sambar, coconut chutney.", "price": 130, "tags": ["veg"], "status": "on", "sort": 30 },
+    { "id": "uttapam", "category": "south-indian", "name": "Onion Tomato Uttapam", "desc": "Thick rice pancake, onion and tomato topping.", "price": 170, "tags": ["veg"], "status": "on", "sort": 40 },
+    { "id": "medu-vada", "category": "south-indian", "name": "Medu Vada (2 pcs)", "desc": "Crisp fried lentil doughnuts, sambar, chutney.", "price": 120, "tags": ["veg"], "status": "on", "sort": 50 },
+
+    { "id": "dal-makhani", "category": "curries-veg", "name": "Dal Makhani", "desc": "Black lentils, slow-simmered overnight, butter and cream.", "price": 340, "tags": ["veg", "bestseller"], "status": "on", "special": true, "specialPrice": 280, "sort": 10 },
+    { "id": "paneer-butter-masala", "category": "curries-veg", "name": "Paneer Butter Masala", "desc": "Cottage cheese in a mild tomato-cashew gravy.", "price": 380, "tags": ["veg"], "status": "on", "sort": 20 },
+    { "id": "palak-paneer", "category": "curries-veg", "name": "Palak Paneer", "desc": "Cottage cheese in a slow-cooked spinach gravy.", "price": 360, "tags": ["veg"], "status": "on", "sort": 30 },
+    { "id": "chana-masala", "category": "curries-veg", "name": "Chana Masala", "desc": "Chickpeas, onion-tomato masala, dried mango powder.", "price": 300, "tags": ["veg"], "status": "on", "sort": 40 },
+    { "id": "malai-kofta", "category": "curries-veg", "name": "Malai Kofta", "desc": "Paneer and potato dumplings, creamy cashew gravy.", "price": 380, "tags": ["veg"], "status": "on", "sort": 50 },
+    { "id": "baingan-bharta", "category": "curries-veg", "name": "Baingan Bharta", "desc": "Smoked mashed eggplant, onion, tomato, mustard oil.", "price": 320, "tags": ["veg"], "status": "soldout", "sort": 60 },
+
+    { "id": "butter-chicken", "category": "curries-non-veg", "name": "Butter Chicken", "desc": "Tandoori chicken in a tomato-cashew gravy, finished with cream.", "price": 480, "tags": ["bestseller", "signature"], "status": "on", "sort": 10 },
+    { "id": "kadai-mutton", "category": "curries-non-veg", "name": "Kadai Mutton", "desc": "Bell peppers, onion, whole-spice masala.", "price": 560, "spice": 3, "status": "on", "sort": 20 },
+    { "id": "chicken-chettinad", "category": "curries-non-veg", "name": "Chicken Chettinad", "desc": "Roasted spice masala, curry leaf, black pepper.", "price": 460, "spice": 3, "status": "on", "sort": 30 },
+    { "id": "fish-curry", "category": "curries-non-veg", "name": "Malabar Fish Curry", "desc": "Coconut milk, kokum, curry leaf, mustard seed.", "price": 480, "status": "on", "sort": 40 },
+    { "id": "egg-curry", "category": "curries-non-veg", "name": "Egg Curry", "desc": "Boiled eggs, onion-tomato masala.", "price": 300, "status": "off", "sort": 50 },
+
+    { "id": "veg-biryani", "category": "biryani-rice", "name": "Vegetable Dum Biryani", "desc": "Basmati, mixed vegetables, saffron, fried onion.", "price": 360, "tags": ["veg"], "status": "on", "sort": 10 },
+    { "id": "chicken-biryani", "category": "biryani-rice", "name": "Hyderabadi Chicken Biryani", "desc": "Dum-cooked basmati, saffron, fried onion, raita.", "price": 420, "tags": ["signature", "bestseller"], "status": "on", "sort": 20 },
+    { "id": "mutton-biryani", "category": "biryani-rice", "name": "Mutton Biryani", "desc": "Slow dum-cooked basmati, tender mutton, saffron.", "price": 520, "tags": ["signature"], "status": "on", "sort": 30 },
+    { "id": "jeera-rice", "category": "biryani-rice", "name": "Jeera Rice", "desc": "Basmati tempered with cumin and ghee.", "price": 220, "tags": ["veg"], "status": "on", "sort": 40 },
+    { "id": "curd-rice", "category": "biryani-rice", "name": "Curd Rice", "desc": "Cooling rice and yoghurt, curry leaf and mustard tempering.", "price": 200, "tags": ["veg"], "status": "on", "sort": 50 },
+
+    { "id": "tandoori-roti", "category": "breads", "name": "Tandoori Roti", "desc": "Whole-wheat, char-baked in the tandoor.", "price": 40, "tags": ["veg"], "status": "on", "sort": 10 },
+    { "id": "butter-naan", "category": "breads", "name": "Butter Naan", "desc": "Leavened flatbread, brushed with butter.", "price": 70, "tags": ["veg"], "status": "on", "sort": 20 },
+    { "id": "garlic-naan", "category": "breads", "name": "Garlic Naan", "desc": "Tandoor-baked, garlic and coriander butter.", "price": 90, "tags": ["veg"], "status": "on", "sort": 30 },
+    { "id": "laccha-paratha", "category": "breads", "name": "Laccha Paratha", "desc": "Layered, pan-fried whole-wheat flatbread.", "price": 80, "tags": ["veg"], "status": "on", "sort": 40 },
+    { "id": "kulcha", "category": "breads", "name": "Amritsari Kulcha", "desc": "Stuffed with spiced potato, tandoor-baked.", "price": 110, "tags": ["veg"], "status": "on", "sort": 50 },
+
+    { "id": "boondi-raita", "category": "accompaniments", "name": "Boondi Raita", "desc": "Yoghurt, crisp gram-flour pearls, roasted cumin.", "price": 90, "tags": ["veg"], "status": "on", "sort": 10 },
+    { "id": "papad", "category": "accompaniments", "name": "Roasted Papad (2 pcs)", "desc": "Lentil wafers, roasted or fried.", "price": 60, "tags": ["veg"], "status": "on", "sort": 20 },
+    { "id": "pickle-sampler", "category": "accompaniments", "name": "Pickle Sampler", "desc": "Mango, lime and mixed-vegetable pickle.", "price": 50, "tags": ["veg"], "status": "on", "sort": 30 },
+
+    { "id": "gulab-jamun", "category": "desserts", "name": "Gulab Jamun (2 pcs)", "desc": "Milk-solid dumplings in cardamom-rose syrup.", "price": 160, "tags": ["veg"], "status": "on", "sort": 10 },
+    { "id": "gajar-halwa", "category": "desserts", "name": "Gajar Ka Halwa", "desc": "Slow-cooked carrot, milk, ghee, cardamom, served warm.", "price": 190, "tags": ["veg"], "status": "on", "sort": 20 },
+    { "id": "saffron-kheer", "category": "desserts", "name": "Saffron Kheer", "desc": "Slow-simmered rice pudding, pistachio, saffron.", "price": 180, "tags": ["veg", "gf"], "status": "on", "special": true, "specialPrice": 150, "sort": 30 },
+    { "id": "kulfi-falooda", "category": "desserts", "name": "Kulfi Falooda", "desc": "Pistachio kulfi, vermicelli, rose syrup, basil seeds.", "price": 220, "tags": ["veg"], "status": "on", "sort": 40 },
+
+    { "id": "masala-chai", "category": "beverages", "name": "Masala Chai", "desc": "Spiced milk tea, cardamom and ginger.", "price": 60, "tags": ["veg"], "status": "on", "sort": 10 },
+    { "id": "filter-coffee", "category": "beverages", "name": "South Indian Filter Coffee", "desc": "Slow-brewed, frothed, served in a davara-tumbler.", "price": 70, "tags": ["veg"], "status": "on", "sort": 20 },
+    { "id": "sweet-lassi", "category": "beverages", "name": "Sweet Lassi", "desc": "Churned yoghurt, sugar, a hint of cardamom.", "price": 110, "tags": ["veg"], "status": "on", "sort": 30 },
+    { "id": "mango-lassi", "category": "beverages", "name": "Mango Lassi", "desc": "Churned yoghurt, seasonal mango pulp.", "price": 140, "tags": ["veg", "bestseller"], "status": "on", "sort": 40 },
+    { "id": "nimbu-pani", "category": "beverages", "name": "Nimbu Pani", "desc": "Fresh lime, mint, black salt.", "price": 90, "tags": ["veg"], "status": "on", "sort": 50 },
+    { "id": "buttermilk", "category": "beverages", "name": "Spiced Buttermilk", "desc": "Curry leaf, ginger, green chilli, roasted cumin.", "price": 80, "tags": ["veg"], "status": "on", "sort": 60 }
+  ]
+}

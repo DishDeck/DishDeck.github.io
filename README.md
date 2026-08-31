@@ -24,11 +24,15 @@ index.html            the storefront (menu, hero, specials, hours, footer)
 board.html             a printable "Today's Board" page (specials, QR, PDF-ready)
 admin.html             a no-backend price/status/specials editor for staff
 qr.html                 a QR-code generator for any menu link or table card
-nova-table/, saffron-house/   clean-URL entry points, see "Clean URLs" below
+akshaya-patra/, nova-table/, saffron-house/   clean-URL entry points, see "Clean URLs" below
+  index.html + admin.html   (one copy of each root page, per restaurant)
 config/
   tenants.json         registry: which restaurants exist, how to route to each
   runtime.json          optional CI/env overrides layered on top of each brand
 restaurants/
+  akshaya-patra/         classic-skin example, the default restaurant — a full
+    brand.json             Indian menu (12 sections, 55 dishes: tandoor,
+    menu.json               biryani, South Indian, curries, thali staples...)
   nova-table/            futuristic-skin example, sourced from a local menu.json
     brand.json
     menu.json
@@ -51,42 +55,53 @@ which one to show, in this order:
 3. a `/r/<id>/` path segment (an older, equivalent form of the same thing)
 4. `#/<id>` in the URL hash
 5. the `hosts` map in `config/tenants.json` (for a custom domain per restaurant)
-6. `default` in `config/tenants.json`
+6. `default` in `config/tenants.json` — currently **Akshaya Patra**
 
 For a single-restaurant deployment, just set `default` and ignore the rest.
 
 ## Clean per-restaurant URLs
 
-`?r=nova-table` always works with zero setup, but a clean URL like
-`DishDeck.github.io/nova-table/` reads better on a menu card or a QR code.
-GitHub Pages has no server-side rewriting, so this repo gets clean URLs the
-only way a static host can: a real folder per restaurant at the repo root,
-containing a copy of the root `index.html` shell. That's what `nova-table/`
-and `saffron-house/` are — open either one's `index.html`, look at it next to
-the root one, they're identical. The app resolves which restaurant to show
-from the URL path itself (step 2 above), so the shell doesn't need to know
-its own restaurant's id.
+`?r=akshaya-patra` always works with zero setup, but a clean URL like
+`DishDeck.github.io/akshaya-patra/` reads better on a menu card or a QR
+code — and `DishDeck.github.io/akshaya-patra/admin` gets the same restaurant's
+price/status editor with nowhere to type. GitHub Pages has no server-side
+rewriting, so this repo gets clean URLs the only way a static host can: a
+real folder per restaurant at the repo root, containing a copy of the root
+`index.html` and `admin.html`. That's what `akshaya-patra/`, `nova-table/`
+and `saffron-house/` are — open any of their `index.html`/`admin.html` next
+to the root ones, they're identical. The app resolves which restaurant to
+show from the URL path itself (step 2 above), so neither shell needs to know
+its own restaurant's id — the same two files work unmodified in every
+restaurant's folder.
 
-To give a new restaurant `<your-id>` the same clean URL:
+`/<id>/admin` (no `.html`) works because GitHub Pages serves `<name>.html`
+for a request to `/<name>` whenever no file extension is given and no folder
+of that exact name exists — the same behaviour that lets `/akshaya-patra`
+(no trailing slash) find that folder's `index.html`. If that ever doesn't
+resolve on your specific setup, `/<id>/admin.html` with the extension always
+works regardless.
+
+To give a new restaurant `<your-id>` the same two clean URLs:
 
 ```bash
 mkdir <your-id>
-cp index.html <your-id>/index.html
+cp index.html admin.html <your-id>/
 ```
 
-That's it — no edits to the copied file. If you ever restructure the root
-`index.html`, copy it over each restaurant folder's copy again to keep them
-in sync (there's currently no build step doing this for you).
+That's it — no edits to either copied file. If you ever restructure the root
+`index.html` or `admin.html`, copy it over every restaurant folder's copy
+again to keep them in sync (there's currently no build step doing this for
+you).
 
-**A true subdomain** (`nova-table.dishdeck.github.io`) is not something
+**A true subdomain** (`akshayapatra.dishdeck.github.io`) is not something
 GitHub or anyone else can hand out under `github.io` — that namespace belongs
 to GitHub. It becomes possible once you point your **own** domain at GitHub
-Pages (e.g. `nova-table.yourdomain.com` via a CNAME record); the `hosts` map
+Pages (e.g. `akshayapatra.yourdomain.com` via a CNAME record); the `hosts` map
 in `config/tenants.json` is exactly for that case.
 
 ## Getting your own restaurant live in 5 minutes
 
-1. Copy `restaurants/nova-table/` (or `saffron-house/`) to `restaurants/<your-id>/`.
+1. Copy `restaurants/akshaya-patra/` (or `nova-table/`/`saffron-house/`) to `restaurants/<your-id>/`.
 2. Edit `brand.json` (or `.yaml`) — name, tagline, contact info, hours, and
    `theme.skin` / `theme.accent` / `theme.accent2` to taste. Drop a logo file
    in the folder and point `logo.src` at it, or leave it blank for an
@@ -94,9 +109,10 @@ in `config/tenants.json` is exactly for that case.
 3. Edit `menu.json` — or switch `data.source` to `sheet` and point it at a
    Google Sheet (see below) if you want non-technical staff editing it.
 4. Add an entry for `<your-id>` to `config/tenants.json`'s `restaurants` array.
-5. Optional — for a clean URL instead of `?r=`: `mkdir <your-id> && cp index.html <your-id>/index.html`.
+5. Optional — for clean URLs instead of `?r=`: `mkdir <your-id> && cp index.html admin.html <your-id>/`.
 6. Commit and push. GitHub Pages (via the included Actions workflow) deploys
-   automatically. Visit `/?r=<your-id>` (or `/<your-id>/` if you did step 5).
+   automatically. Visit `/?r=<your-id>` (or `/<your-id>/` and `/<your-id>/admin`
+   if you did step 5).
 
 ## Changing prices / today's special / sold-out — without touching code
 
@@ -118,11 +134,12 @@ This works because Google Sheets can export any sheet as a public CSV URL —
 no API key, no server, and it stays inside GitHub Pages' free static hosting.
 
 ### C. Use `admin.html` as a quick local editor
-Open `admin.html?r=<id>` for a spreadsheet-like grid of the current menu.
-Edit prices/status/specials, then **Download menu.json** (commit it over the
-restaurant's file) or **Copy CSV** (paste it over the Menu tab of a Google
-Sheet). It never writes anywhere by itself — this is a static site with no
-server, so "save" always means "export, then commit or paste it yourself".
+Open `/<id>/admin` (or `admin.html?r=<id>`) for a spreadsheet-like grid of the
+current menu. Edit prices/status/specials, then **Download menu.json**
+(commit it over the restaurant's file) or **Copy CSV** (paste it over the
+Menu tab of a Google Sheet). It never writes anywhere by itself — this is a
+static site with no server, so "save" always means "export, then commit or
+paste it yourself".
 
 ## Daily specials board
 
@@ -179,6 +196,26 @@ default layout, not a squeezed-down afterthought:
 - Searching always looks across the *entire* menu regardless of which
   category chip is selected — see "Search" below.
 
+## Dish photos & video
+
+Every dish can carry an `image`, a short `video` (`.mp4`/`.webm`), or both —
+set per dish in `menu.json` or in the Sheet's `video` column (see
+[`SHEET_TEMPLATE.md`](restaurants/saffron-house/SHEET_TEMPLATE.md)). With a
+video set:
+
+- the **card** shows a muted, looping preview that only starts loading once
+  it actually scrolls into view (nothing is fetched for a clip a guest never
+  scrolls to), and pauses again the moment it scrolls back out;
+- opening the dish plays the same clip **with sound** and normal controls;
+- a guest with `prefers-reduced-motion` on, or an active "Data Saver"
+  connection, never gets the autoplay preview at all — just the poster image
+  (`image`, or the clip's first frame if `image` is blank) — since an
+  autoplaying muted clip is a fair trade for someone with data to spare, and
+  a battery/bandwidth cost for someone who explicitly said they'd rather not.
+
+No video required for any dish — plain `image` continues to work exactly as
+before.
+
 ## Search
 
 Typing matches **every word you type against every dish**, in any order and
@@ -209,7 +246,8 @@ npx serve .
 python -m http.server 8080
 ```
 
-Then open `http://localhost:8080/?r=nova-table` (or `saffron-house`).
+Then open `http://localhost:8080/` (Akshaya Patra, the default) or
+`http://localhost:8080/?r=nova-table` / `?r=saffron-house` for the others.
 
 ## Deploying
 

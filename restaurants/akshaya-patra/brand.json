@@ -1,0 +1,53 @@
+{
+  "name": "Akshaya Patra",
+  "tagline": "The Inexhaustible Vessel",
+  "about": "Named for the vessel of Indian legend that never runs empty, our kitchen serves a full spread of North and South Indian cooking — thalis, tandoor, curries and dosas — the way a home kitchen would, just for more people at once.",
+
+  "logo": { "text": "AP", "alt": "Akshaya Patra logo" },
+
+  "theme": {
+    "skin": "classic",
+    "mode": "dark",
+    "accent": "#e0a63c",
+    "accent2": "#b23a2e",
+    "heroImage": ""
+  },
+
+  "currency": { "code": "INR", "symbol": "₹" },
+
+  "contact": {
+    "phone": "+91 98220 55667",
+    "whatsapp": "+919822055667",
+    "address": "7 Temple Street, Malleshwaram, Bengaluru",
+    "maps": "https://maps.google.com/?q=Malleshwaram+Bengaluru",
+    "email": "namaste@akshayapatra.example.com",
+    "bookUrl": ""
+  },
+
+  "social": {
+    "instagram": "https://instagram.com/akshayapatra",
+    "facebook": "https://facebook.com/akshayapatra"
+  },
+
+  "hours": {
+    "mon": [["11:30", "15:30"], ["19:00", "22:30"]],
+    "tue": [["11:30", "15:30"], ["19:00", "22:30"]],
+    "wed": [["11:30", "15:30"], ["19:00", "22:30"]],
+    "thu": [["11:30", "15:30"], ["19:00", "22:30"]],
+    "fri": [["11:30", "15:30"], ["19:00", "23:00"]],
+    "sat": [["11:00", "16:00"], ["19:00", "23:00"]],
+    "sun": [["11:00", "16:00"], ["19:00", "22:30"]]
+  },
+
+  "closedDates": [],
+
+  "labels": {
+    "specialsTitle": "Thali of the Day",
+    "specialsNote": "Cooked once, served fresh — gone when the pot is empty."
+  },
+
+  "data": {
+    "source": "json",
+    "menuUrl": "menu.json"
+  }
+}

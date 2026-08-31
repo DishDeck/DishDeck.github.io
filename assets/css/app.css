@@ -260,11 +260,11 @@ img.brand-logo { padding: 5px; }
 .card:hover { transform: translateY(-3px); border-color: var(--accent-a55); box-shadow: var(--glow); }
 
 .card-media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--panel-2); }
-.card-media img {
-  width: 100%; height: 100%; object-fit: cover;
+.card-media img, .card-media video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
   transition: transform 600ms cubic-bezier(.2, .7, .3, 1), filter var(--tr);
 }
-.card:hover .card-media img { transform: scale(1.05); }
+.card:hover .card-media img, .card:hover .card-media video { transform: scale(1.05); }
 
 .card-badges { position: absolute; top: 10px; left: 10px; display: flex; gap: 6px; flex-wrap: wrap; z-index: 2; }
 .badge {
@@ -292,8 +292,8 @@ img.brand-logo { padding: 5px; }
 .spice { color: var(--bad); font-size: .72rem; letter-spacing: 1px; }
 
 /* Sold-out / off-menu treatment: dim, desaturate, stamp. */
-.card[data-status="soldout"] .card-media img,
-.card[data-status="off"] .card-media img { filter: grayscale(1) contrast(.85) brightness(.62); }
+.card[data-status="soldout"] .card-media img, .card[data-status="soldout"] .card-media video,
+.card[data-status="off"] .card-media img, .card[data-status="off"] .card-media video { filter: grayscale(1) contrast(.85) brightness(.62); }
 .card[data-status="soldout"], .card[data-status="off"] { opacity: .86; }
 .card[data-status="soldout"] .card-name, .card[data-status="off"] .card-name { color: var(--ink-2); }
 .card[data-status="soldout"] .price, .card[data-status="off"] .price { color: var(--ink-3); text-decoration: line-through; }
@@ -357,7 +357,7 @@ dialog.sheet {
 }
 dialog.sheet::backdrop { background: rgba(3, 6, 14, .68); backdrop-filter: blur(4px); }
 .sheet-media { aspect-ratio: 16 / 9; overflow: hidden; position: sticky; top: 0; }
-.sheet-media img { width: 100%; height: 100%; object-fit: cover; }
+.sheet-media img, .sheet-media video { width: 100%; height: 100%; object-fit: cover; background: #000; }
 .sheet-body { padding: clamp(18px, 3vw, 26px); display: flex; flex-direction: column; gap: 12px; }
 .sheet-title { font-size: var(--step-2); }
 .sheet-close {
