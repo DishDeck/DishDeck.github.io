@@ -17,56 +17,68 @@
 }
 
 .topbar-in {
-  display: flex; align-items: center; gap: clamp(10px, 2vw, 20px);
-  padding-block: 14px;
-  flex-wrap: wrap;
+  display: flex; align-items: center; gap: 12px;
+  padding-block: 12px;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
-.brand { display: flex; align-items: center; gap: 12px; min-width: 0; text-decoration: none; flex: 1 1 auto; }
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  min-width: 0; text-decoration: none;
+  flex: 1 1 auto; min-width: 0;
+}
 
 .brand-logo {
-  width: 46px; height: 46px; flex: none;
-  border-radius: 12px; object-fit: contain;
+  width: 40px; height: 40px; flex: none;
+  border-radius: 10px; object-fit: contain;
   display: grid; place-items: center;
   border: 1px solid var(--line-strong);
   background: var(--panel-2);
-  font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
+  font-family: var(--font-display); font-weight: 700; font-size: 0.9rem;
   letter-spacing: .02em; color: var(--accent);
 }
 :root[data-skin="classic"] .brand-logo { border-radius: 50%; }
-img.brand-logo { padding: 5px; }
+img.brand-logo { padding: 4px; }
 
 .brand-name {
-  font-family: var(--font-display); font-size: var(--step-1); font-weight: 600;
-  line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-family: var(--font-display); font-size: var(--step-0); font-weight: 600;
+  line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 :root[data-skin="futuristic"] .brand-name { letter-spacing: .05em; text-transform: uppercase; }
 .brand-sub {
-  font-size: .72rem; color: var(--ink-3); letter-spacing: .16em; text-transform: uppercase;
+  display: none;
+  font-size: .65rem; color: var(--ink-3); letter-spacing: .16em; text-transform: uppercase;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .topbar-actions {
-  margin-left: auto; display: flex; align-items: center; gap: 6px;
-  flex: 0 1 auto;
+  margin-left: auto; display: flex; align-items: center; gap: 4px;
+  flex: 0 0 auto; flex-wrap: nowrap;
 }
-.topbar-actions .btn { padding-inline: 14px; font-size: var(--step--1); }
+.topbar-actions .btn {
+  padding-inline: 10px; font-size: .8rem;
+  height: 40px; display: flex; align-items: center; justify-content: center;
+  white-space: nowrap;
+}
+.topbar-actions .btn-icon {
+  width: 40px; height: 40px; flex: none;
+}
 
-@media (max-width: 720px) {
-  .hide-sm { display: none !important; }
-  .brand-logo { width: 40px; height: 40px; }
-  .topbar-in { padding-block: 12px; gap: 10px; }
+@media (min-width: 481px) {
+  .brand-logo { width: 44px; height: 44px; }
   .brand-name { font-size: var(--step-0); }
-  .topbar-actions .btn { padding-inline: 10px; font-size: .75rem; }
-  .topbar-actions .btn-icon { width: 40px; height: 40px; }
+  .topbar-actions .btn { padding-inline: 12px; font-size: .85rem; }
 }
 
-@media (max-width: 480px) {
-  .brand-name { max-width: 100px; }
-  .brand-sub { display: none; }
-  .topbar-actions { gap: 4px; }
-  .topbar-actions .btn { padding-inline: 8px; min-height: 40px; }
-  .topbar-actions .btn-icon { width: 36px; height: 36px; }
+@media (min-width: 721px) {
+  .brand-logo { width: 46px; height: 46px; font-size: 1.05rem; }
+  .brand-name { font-size: var(--step-1); }
+  .brand-sub { display: block; }
+  .topbar-in { gap: clamp(10px, 2vw, 20px); padding-block: 14px; }
+  .brand { gap: 12px; }
+  .topbar-actions { gap: 6px; }
+  .topbar-actions .btn { padding-inline: 14px; font-size: var(--step--1); }
 }
 
 /* -------------------------------- hero --------------------------------- */
