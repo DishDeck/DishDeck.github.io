@@ -15,6 +15,11 @@ Every restaurant picks its skin, its accent colours, its fonts and its logo
 from a small config file. No restaurant-specific code is ever written — a new
 restaurant is a new folder with a config and a menu, nothing else.
 
+## Quick links
+
+- **[SETUP.md](SETUP.md)** — Getting a restaurant live in 5 minutes (step-by-step guide)
+- **[DEVELOPER.md](DEVELOPER.md)** — Technical deep-dive: architecture, code structure, customization
+
 ---
 
 ## Live structure
