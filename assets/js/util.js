@@ -236,6 +236,47 @@ export function placeholderImage(seedText, opts) {
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
 
+/* -------------------------------- Google Drive ------------------------ */
+
+/**
+ * Resolves a Google Drive share link, preview link, or file ID into a direct public CDN image URL.
+ * Supports:
+ * - https://drive.google.com/file/d/<ID>/view?usp=sharing
+ * - https://drive.google.com/open?id=<ID>
+ * - https://drive.google.com/uc?id=<ID>
+ * - https://drive.google.com/thumbnail?id=<ID>&sz=w...
+ * - Bare Drive file IDs (e.g. 1aBcDeFg-1234567890abcdef)
+ *
+ * Uses Google's fast user-content CDN: https://lh3.googleusercontent.com/d/<ID>
+ */
+export function resolveGoogleDriveUrl(url) {
+  if (!url) return '';
+  const str = String(url).trim();
+  if (!str) return '';
+
+  if (str.includes('googleusercontent.com/d/')) return str;
+
+  const id = getGoogleDriveFileId(str);
+  if (id) {
+    return 'https://lh3.googleusercontent.com/d/' + id;
+  }
+  return str;
+}
+
+/** Extracts the Google Drive file ID from any share link, or returns it if already an ID */
+export function getGoogleDriveFileId(url) {
+  if (!url) return '';
+  const str = String(url).trim();
+  let m = str.match(/\/file\/d\/([a-zA-Z0-9_-]{20,})/);
+  if (m) return m[1];
+  m = str.match(/[?&]id=([a-zA-Z0-9_-]{20,})/);
+  if (m) return m[1];
+  m = str.match(/\/d\/([a-zA-Z0-9_-]{20,})/);
+  if (m) return m[1];
+  if (/^[a-zA-Z0-9_-]{25,45}$/.test(str)) return str;
+  return '';
+}
+
 /* -------------------------------- QR codes ----------------------------- */
 
 /**

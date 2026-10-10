@@ -284,6 +284,7 @@ function renderHero() {
       b.about ? h('p.hero-tagline', {}, b.about) : null,
       h('div.hero-meta', {}, [
         h('span.pill', { class: st.open ? 'is-open' : 'is-shut' }, [h('span.dot'), st.label + (st.detail ? ' · ' + st.detail : '')]),
+        params.get('table') ? h('span.pill', { style: 'border-color:var(--accent);color:var(--accent);font-weight:600' }, ['\u{1F37D} Table ' + params.get('table')]) : null,
         b.contact.phone ? h('a.pill', { href: 'tel:' + b.contact.phone }, [icon('phone'), b.contact.phone]) : null,
       ]),
       h('div.hero-cta', {}, [
@@ -309,7 +310,10 @@ function renderSpecialsCard() {
     items.length
       ? h('ul.board-list', {}, items.map((it) => h('li', {}, [
           h('button.board-item', { onclick: () => openDish(it) }, [
-            h('img.board-thumb', { src: it.image || placeholderImage(it.name), alt: '', loading: 'lazy' }),
+            h('img.board-thumb', {
+              src: it.image || placeholderImage(it.name), alt: '', loading: 'lazy',
+              onerror: (e) => { if (!e.target.dataset.failed) { e.target.dataset.failed = '1'; e.target.src = placeholderImage(it.name); } },
+            }),
             h('span', {}, [
               h('span.board-name', {}, it.name),
               it.desc ? h('span.board-note', {}, truncate(it.desc, 60)) : null,
@@ -437,7 +441,10 @@ function dishCard(it) {
   const showVideo = hasVideo && wantsAutoplayPreview();
   return h('button.card', { 'data-status': it.status, onclick: () => openDish(it) }, [
     h('div.card-media', {}, [
-      showVideo ? lazyPreviewVideo(it) : h('img', { src: img, alt: it.name, loading: 'lazy' }),
+      showVideo ? lazyPreviewVideo(it) : h('img', {
+        src: img, alt: it.name, loading: 'lazy',
+        onerror: (e) => { if (!e.target.dataset.failed) { e.target.dataset.failed = '1'; e.target.src = placeholderImage(it.name); } },
+      }),
       h('div.card-badges', {}, [
         it.special ? h('span.badge.badge-special', {}, b.labels.specialBadge || 'Today') : null,
         it.status === 'soldout' ? h('span.badge.badge-dim', {}, b.labels.soldOut || 'Sold out') : null,
@@ -480,7 +487,10 @@ function openDish(it) {
     h('div.sheet-media', {}, [
       hasVideo
         ? h('video', { controls: true, playsinline: true, preload: 'metadata', poster: img }, videoSources(it.video))
-        : h('img', { src: img, alt: it.name }),
+        : h('img', {
+            src: img, alt: it.name,
+            onerror: (e) => { if (!e.target.dataset.failed) { e.target.dataset.failed = '1'; e.target.src = placeholderImage(it.name); } },
+          }),
     ]),
     h('div.sheet-body', {}, [
       it.special ? h('span.badge.badge-special', { style: 'align-self:flex-start' }, b.labels.specialBadge || 'Today') : null,

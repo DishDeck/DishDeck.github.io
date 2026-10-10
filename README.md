@@ -15,6 +15,7 @@ restaurant is a new folder with a config and a menu, nothing else.
 
 ## Quick links
 
+- **[GOOGLE_SHEET_SETUP.md](GOOGLE_SHEET_SETUP.md)** — Complete Google Drive & Google Sheets setup, security, & Apps Script guide
 - **[SETUP.md](SETUP.md)** — Getting a restaurant live in 5 minutes (step-by-step guide)
 - **[DEVELOPER.md](DEVELOPER.md)** — Technical deep-dive: architecture, code structure, customization
 
@@ -23,10 +24,12 @@ restaurant is a new folder with a config and a menu, nothing else.
 ## Live structure
 
 ```
-index.html            the storefront (menu, hero, specials, hours, footer)
+index.html            the storefront (menu, hero, specials, hours, footer, ?table=X)
 board.html             a printable "Today's Board" page (specials, QR, PDF-ready)
-admin.html             a no-backend price/status/specials editor for staff
-qr.html                 a QR-code generator for any menu link or table card
+admin.html             live dynamic editor (Google Sign-In, Apps Script, Drive photos)
+qr.html                 table QR card generator (single table & batch printable cards)
+google-apps-script/
+  Code.gs              ready-to-deploy Google Apps Script (1-click save & image upload)
 config/
   tenants.json         registry: which restaurants exist, how to route to each
   runtime.json          optional CI/env overrides layered on top of each brand

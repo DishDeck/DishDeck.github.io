@@ -8,7 +8,7 @@
  *   5. ?override= URL params (debug only, e.g. ?skin=classic&mode=light)
  */
 
-import { fetchJSON, fetchText, params, log } from './util.js';
+import { fetchJSON, fetchText, params, log, resolveGoogleDriveUrl } from './util.js';
 import { parseYAML } from './yaml.js';
 
 // Root-absolute so these still resolve correctly from a nested clean-URL
@@ -224,9 +224,11 @@ export function cleanMenuLink(brand) {
   return location.origin + '/' + brand.id + '/';
 }
 
-/** Absolute-or-relative asset URL, resolved against the restaurant folder. */
+/** Absolute-or-relative asset URL, resolved against the restaurant folder or Google Drive. */
 export function assetUrl(brand, path) {
   if (!path) return '';
+  const driveResolved = resolveGoogleDriveUrl(path);
+  if (driveResolved !== path) return driveResolved;
   if (/^(https?:|data:|\/\/)/i.test(path) || path.startsWith('/')) return path;
   return brand.dir + '/' + path.replace(/^\.\//, '');
 }
